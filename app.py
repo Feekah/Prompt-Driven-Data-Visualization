@@ -10,6 +10,7 @@ from PIL import Image
 
 load_dotenv()
 api_key = os.getenv('OPENAI_KEY')
+#load evn variables
 
 # Set up OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_KEY"))
@@ -25,7 +26,7 @@ uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xls
 user_query = st.text_input("Enter your query for visualization (e.g., 'Visualize revenue by year')")
 
 
-color_theme = st.selectbox("Select a color theme for your visualization", 
+color_themes = st.selectbox("Select a color theme for your visualization", 
                            ["Fiery Red", "Executive Blue", "SMG"])
 
 # Define color palettes for each theme

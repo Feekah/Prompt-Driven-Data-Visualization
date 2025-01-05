@@ -71,3 +71,33 @@ if uploaded_file:
     )
 
     st.write("Generating plot...")
+
+    # Check for completion and retrieve the plot
+    while True:
+        messages = client.beta.threads.messages.list(thread_id=thread.id)
+        try:
+            # Check if image file is in response
+            plot_file_id = messages.data[0].content[0].image_file.file_id
+            time.sleep(5)  # Wait a bit to ensure run is completed
+            break
+        except:
+            time.sleep(5)
+            st.write("Assistant is still processing...")
+
+    # Retrieve and display the plot
+    def convert_file_to_png(file_id, write_path):
+        data = client.files.content(file_id)
+        data_bytes = data.read()
+        with open(write_path, "wb") as file:
+            file.write(data_bytes)
+
+    # Convert plot to PNG and display
+    image_path = "generated_plot.png"
+    convert_file_to_png(plot_file_id, image_path)
+    
+    st.write("### Generated Plot:")
+    st.image(image_path)
+
+    # Clean up temporary files
+    os.remove(unique_json_path)
+    os.remove(image_path)

@@ -47,3 +47,27 @@ if uploaded_file:
         purpose='assistants'
     )
 
+    # Define assistant instructions
+    assistant = client.beta.assistants.create(
+        instructions=f"You are a data scientist assistant. When given data and a query, write the proper code and create the proper visualization based on the query.",
+        model="gpt-4o",
+        tools=[{"type": "code_interpreter"}],
+        tool_resources={"code_interpreter": {"file_ids": [file.id]}}
+    )
+
+    # Create a thread and send the user query
+    thread = client.beta.threads.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_query
+                    }
+        ]
+    )
+    # Run the assistant
+    run = client.beta.threads.runs.create(
+        thread_id=thread.id,
+        assistant_id=assistant.id,
+    )
+
+    st.write("Generating plot...")

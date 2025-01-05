@@ -6,3 +6,5 @@ import json
 import time
 from datetime import datetime
 from PIL import Image
+
+os.environ['OPENAI_API_KEY'] = 'your-api-key'

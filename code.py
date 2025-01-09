@@ -5,10 +5,11 @@ import os
 import json
 import time
 from datetime import datetime
+from dotenv import load_dotenv
 from PIL import Image
 
-os.environ['OPENAI_API_KEY'] = 'your-api-key'
-OpenAI.api_key = os.getenv('OPENAI_API_KEY')
+load_dotenv()
+api_key = os.getenv('OPENAI_API_KEY')
 
 # Set up OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))

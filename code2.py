@@ -4,18 +4,17 @@ from openai import OpenAI
 import os
 import json
 import time
-from datetime import datetime
 from dotenv import load_dotenv
+from datetime import datetime
 from PIL import Image
 
-load_dotenv()
-api_key = os.getenv('OPENAI_KEY')
+load_dotenv('.env')
 
 # Set up OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_KEY"))
 
 # Streamlit App UI
-st.title("AI-Powered Data Visualization App")
+st.title("SMG AI-Powered Data Visualization App")
 st.write("Upload a CSV or Excel file, enter your query, and let AI create the visualization for you.")
 
 # File upload
@@ -24,8 +23,18 @@ uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xls
 # User query input
 user_query = st.text_input("Enter your query for visualization (e.g., 'Visualize revenue by year')")
 
+# Color theme selection
+color_theme = st.selectbox("Select a color theme for your visualization", 
+                           ["Fiery Red", "Executive Blue", "SMG"])
 
-# Process the uploaded file
+# Define color palettes for each theme
+color_palettes = {
+    "Fiery Red": ["#FF4500", "#FFA500", "#FFD700"],  # Reds, oranges, golds
+    "Executive Blue": ["#00008B", "#000000", "#FFFFFF"],  # Dark blue, black, white
+    "SMG": ["#FFFF00", "#000000", "#FFFFFF"],  # Yellow, black, white
+}
+
+# Check if a file has been uploaded
 if uploaded_file:
     # Load data into a DataFrame
     if uploaded_file.name.endswith('.csv'):
@@ -48,9 +57,12 @@ if uploaded_file:
         purpose='assistants'
     )
 
+    # Include color palette in the instructions for the assistant
+    color_instructions = f"Use the following color palette for the visualization: {', '.join(color_palettes[color_theme])}"
+
     # Define assistant instructions
     assistant = client.beta.assistants.create(
-        instructions=f"You are a data scientist assistant. When given data and a query, write the proper code and create the proper visualization based on the query.",
+        instructions=f"You are a data scientist assistant. When given data, a query, and a color palette, write the proper code and create the proper visualization based on the query. " + color_instructions,
         model="gpt-4o",
         tools=[{"type": "code_interpreter"}],
         tool_resources={"code_interpreter": {"file_ids": [file.id]}}
@@ -62,9 +74,10 @@ if uploaded_file:
             {
                 "role": "user",
                 "content": user_query
-                    }
+            }
         ]
     )
+
     # Run the assistant
     run = client.beta.threads.runs.create(
         thread_id=thread.id,

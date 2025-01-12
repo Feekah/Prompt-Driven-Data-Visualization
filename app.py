@@ -25,6 +25,16 @@ uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xls
 user_query = st.text_input("Enter your query for visualization (e.g., 'Visualize revenue by year')")
 
 
+color_theme = st.selectbox("Select a color theme for your visualization", 
+                           ["Fiery Red", "Executive Blue", "SMG"])
+
+# Define color palettes for each theme
+color_palettes = {
+    "Fiery Red": ["#FF4500", "#FFA500", "#FFD700"],  # Reds, oranges, golds
+    "Executive Blue": ["#00008B", "#000000", "#FFFFFF"],  # Dark blue, black, white
+    "SMG": ["#FFFF00", "#000000", "#FFFFFF"],  # Yellow, black, white
+}
+
 # Process the uploaded file
 if uploaded_file:
     # Load data into a DataFrame

@@ -49,7 +49,6 @@ if uploaded_file:
     st.dataframe(df.head())
 
     unique_json_path = f"fin_data_{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
-    #unique_json_path = f"fin_data.json"
     json_data = df.to_json(orient="columns")
 
     with open(unique_json_path, "w") as json_file:

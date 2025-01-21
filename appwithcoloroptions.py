@@ -30,7 +30,6 @@ color_theme = st.selectbox("Select a color theme for your visualization",
 
 # Define color palettes for each theme
 color_palettes = {
-    #"Fiery Red": ["#FF4500", "#FFA500", "#FFD700"],  # Reds, oranges, golds
     "Fiery Red": ["Red", "Orange", "Yellow"],
     "Executive Blue": ["Blue", "White", "Black"],  # Dark blue, black, white
     "Monochrome": ["Black", "White", "Grey"],  # Yellow, black, white

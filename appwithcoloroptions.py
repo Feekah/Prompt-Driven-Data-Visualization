@@ -26,15 +26,14 @@ user_query = st.text_input("Enter your query for visualization (e.g., 'Visualize
 
 # Color theme selection
 color_theme = st.selectbox("Select a color theme for your visualization", 
-                           ["Fiery Red", "Executive Blue", "SMG"])
+                           ["Fiery Red", "Executive Blue", "Monochrome"])
 
 # Define color palettes for each theme
 color_palettes = {
     #"Fiery Red": ["#FF4500", "#FFA500", "#FFD700"],  # Reds, oranges, golds
-    "Fiery Red": ["Red", "#Orange", "Yellow"],
-
-    "Executive Blue": ["#Blue", "White", "Black"],  # Dark blue, black, white
-    "SMG": ["Yellow", "Black", "White"],  # Yellow, black, white
+    "Fiery Red": ["Red", "Orange", "Yellow"],
+    "Executive Blue": ["Blue", "White", "Black"],  # Dark blue, black, white
+    "Monochrome": ["Black", "White", "Grey"],  # Yellow, black, white
 }
 
 # Check if a file has been uploaded

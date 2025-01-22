@@ -6,7 +6,6 @@ import json
 import time
 from datetime import datetime
 from dotenv import load_dotenv
-from PIL import Image
 
 load_dotenv()
 api_key = os.getenv('OPENAI_KEY')

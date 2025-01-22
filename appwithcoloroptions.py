@@ -64,7 +64,7 @@ if uploaded_file:
     # Define assistant instructions
     assistant = client.beta.assistants.create(
         instructions=f"You are a data scientist assistant. When given data, a query, and a color palette, write the proper code and create the proper visualization based on the query. " + color_instructions,
-        model="gpt-4o",
+        model="gpt-4o-mini",
         tools=[{"type": "code_interpreter"}],
         tool_resources={"code_interpreter": {"file_ids": [file.id]}}
     )

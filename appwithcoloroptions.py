@@ -58,7 +58,7 @@ if uploaded_file:
     )
 
     # Include color palette in the instructions for the assistant
-    color_instructions = f"Use the following color palette for the visualization: {', '.join(color_palettes[color_theme])}"
+    color_instructions = f"Use the following colors for the visualization: {', '.join(color_palettes[color_theme])}"
 
     # Define assistant instructions
     assistant = client.beta.assistants.create(

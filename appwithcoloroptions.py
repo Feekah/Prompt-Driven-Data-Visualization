@@ -84,7 +84,7 @@ if uploaded_file:
         assistant_id=assistant.id,
     )
 
-    st.write("Generating plot...")
+    st.write("Generating plot...wait for it...")
 
     # Check for completion and retrieve the plot
     while True:

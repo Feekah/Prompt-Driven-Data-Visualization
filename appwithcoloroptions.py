@@ -15,7 +15,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_KEY"))
 
 # Streamlit App UI
 st.title("AI-Powered Data Visualization App")
-st.write("Upload a CSV or Excel file, enter your query, and let AI create the visualization for you.")
+st.write("Upload a CSV or Excel file, enter your query, and let AI create the visuals")
 
 # File upload
 uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xlsx"])
